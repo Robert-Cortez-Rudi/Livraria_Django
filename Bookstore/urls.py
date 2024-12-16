@@ -1,8 +1,9 @@
 from django.urls import path
 from django.http import HttpResponse
-from Bookstore.views import home, sobre
+from Bookstore.views import home, logout_user, register_user
 
 urlpatterns = [
-    path("", home),
-    path("sobre/", sobre),
+    path("", home, name="home"),
+    path("logout/", logout_user, name="logout"),
+    path("register/", register_user, name="register")
 ]
