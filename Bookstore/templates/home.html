@@ -1,13 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore</title>
-</head>
-<body>
-    <h2 style="text-align: center;">Lista de livros</h2>
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-center">Login</h2>
     <hr>
+    {% if user.is_authenticated %}
+        <h3>Usuário logado</h3>
+    {% else %}
+        <form method="POST" action="{% url 'home' %}">
+            {% csrf_token %}
 
-</body>
-</html>
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuário</label>
+                <input type="text" class="form-control" id="usuario" name="usuario" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" required>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    {% endif %}
+{% endblock %}
