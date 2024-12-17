@@ -1,10 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class="text-center">Login</h2>
-    <hr>
     {% if user.is_authenticated %}
-        <h3>Usuário logado</h3>
+        <h2 class="text-center">Lista de livros</h2>
+        <hr>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Genêro</th>
+                    <th>Ano</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if books %}
+                    {% for book in books %}
+                        <tr>
+                            <td><a href="{% url 'book' book.id %}">{{ book.id }}</a></td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.genre }}</td>
+                            <td>{{ book.year }}</td>
+                            <td>{{ book.value }}</td>
+                        </tr>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
     {% else %}
+        <h2 class="text-center">Login</h2>
+        <hr>
         <form method="POST" action="{% url 'home' %}">
             {% csrf_token %}
 
