@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Book
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="", widget=forms.TextInput(
@@ -53,3 +54,44 @@ class SignUpForm(UserCreationForm):
                 <small>Digite a mesma senha inserida no campo anterior.</small>
             </span>
         """
+
+class AddBookForm(forms.ModelForm):
+    title = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs= {
+            "placeholder": "Título Livro",
+            "class": "form-control"
+        }
+    ), label="")
+    
+    description = forms.CharField(required=True, widget=forms.widgets.Textarea(
+        attrs= {
+            "placeholder": "Descrição do livro",
+            "class": "form-control"
+        }
+    ), label="")
+
+    year = forms.IntegerField(required=True, widget=forms.widgets.NumberInput(
+        attrs= {
+            "placeholder": "Ano do livro",
+            "class": "form-control"
+        }
+    ), label="")
+
+    genre = forms.CharField(required=True, widget=forms.widgets.TextInput(
+        attrs= {
+            "placeholder": "Gênero",
+            "class": "form-control"
+        }
+    ), label="")
+
+    value = forms.IntegerField(required=True, widget=forms.widgets.NumberInput(
+        attrs= {
+            "placeholder": "Valor",
+            "class": "form-control"
+        }
+    ), label="")
+
+    class Meta:
+        model = Book
+        fields = ("title", "description", "year", "genre", "value")
+        
